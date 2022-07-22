@@ -4,13 +4,82 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Name of chosen challenge</title>
+    <title>Phonie</title>
 
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     
-    <h2>make some magic here!!</h2>
+    <section>
+      <div class="container">
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="face">
+          <h2>Phonie</h2>
+          <p id="slogan-text">Top-up smartly</p>
+          <form novalidate>
+            <p id="res-input">Select your mobile network</p>
+            <div class="radio-container">
+              <input type="radio" id="mtn" name="mobile-carrier" value="MTN" />
+              <label for="mtn">MTN</label>
+              <input type="radio" id="glo" name="mobile-carrier" value="GLO" />
+              <label for="glo">GLO</label>
+              <input
+                type="radio"
+                id="airtel"
+                name="mobile-carrier"
+                value="AIRTEL"
+              />
+              <label for="airtel">AIRTEL</label>
+              <input
+                type="radio"
+                id="etisalat"
+                name="mobile-carrier"
+                value="9MOBILE"
+              />
+              <label for="etisalat">9MOBILE</label>
+            </div>
+
+            <div class="number-field-container">
+              <span class="res-error-message"></span>
+              <input
+                class="restricted-number-field"
+                type="tel"
+                placeholder="Enter your mobile number"
+                maxlength="14"
+              />
+            </div>
+
+            <p id="input-para">
+              Not sure of the mobile carrier? Enter your number below instead
+            </p>
+            <div class="number-field-container">
+              
+              
+              <div class="carrier-logo"></div>
+              <input
+                class="number-field"
+                type="tel"
+                placeholder="Enter your mobile number"
+                maxlength="14"
+              />
+              <span class="error-message"></span>
+              
+            </div>
+            <div class="number-field-container">
+              <input
+                class="amount-field"
+                type="number"
+                placeholder="Enter your purchase amount"
+              />
+            </div>
+            <button type="submit">Pay</button>
+          </form>
+        </div>
+      </div>
+    </section>
 
     <!-- // ============= EEND DO NOT EDIT ============== // -->
     <script src="index.mjs" type="module"></script>

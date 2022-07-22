@@ -1,0 +1,303 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;800&display=swap');
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+:root {
+  --bgr-color: #1b1464;
+  --font-color: white;
+  --error-color: red;
+  --scnd-bgr-color: rgb(238, 6, 18);
+  --container-padding: 60px;
+  --input-padding: 15px;
+  --small-font-size: 14px;
+  --medium-font-size: 16px;
+  --big-font-size: 20px;
+}
+
+body {
+  background: var(--bgr-color);
+  overflow: hidden;
+  color: var(--font-color);
+  font-family: "Poppins", sans-serif;
+}
+
+/* styling the background */
+section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+section::before {
+  content: "";
+  position: absolute;
+  bottom: -40%;
+  left: 40%;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(
+    circle at 100px 200px,
+    rgb(4, 21, 250),
+    rgb(238, 6, 18)
+  );
+  border-radius: 50%;
+  display: block;
+  margin: 0;
+}
+
+section::after {
+  display: block;
+  border-radius: 50%;
+  height: 300px;
+  width: 300px;
+  margin: 0;
+  background: radial-gradient(
+    circle at 50px 100px,
+    rgb(238, 6, 18),
+    rgb(94, 103, 226)
+  );
+  bottom: 51%;
+  left: 17%;
+  position: absolute;
+  content: "";
+}
+/* end */
+
+/* styling the glass-like container */
+.container {
+  position: relative;
+  width: 700px;
+  height: 550px;
+  perspective: 500px;
+  z-index: 2;
+}
+
+.container .face {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  box-shadow: 0 15px 15px rgba(0, 0, 0, 0.5);
+  border-radius: 15px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(28px);
+  transform-style: preserve-3d;
+  transition: 1s;
+  backface-visibility: hidden;
+  border-top: 1px solid rgba(255, 255, 255, 0.4);
+  border-left: 1px solid rgba(255, 255, 255, 0.4);
+  border-right: 1px solid rgba(255, 255, 255, 0.2);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  margin: 0 auto;
+  text-align: center;
+  padding-top: 30px;
+}
+
+.square {
+  position: absolute;
+  border-top: 1px solid rgba(255, 255, 255, 0.4);
+  border-left: 1px solid rgba(255, 255, 255, 0.4);
+  border-right: 1px solid rgba(255, 255, 255, 0.2);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(28px);
+  border-radius: 10px;
+  animation: animate 10s linear infinite;
+  animation-delay: calc(-1s * var(--index));
+}
+
+@keyframes animate {
+  0%, 100% {
+    transform: translateY(-20px);
+  }
+  50% {
+    transform: translateX(20px);
+  }
+}
+.square:first-child {
+  top: -30px;
+  right: -60px;
+  width: 100px;
+  height: 100px;
+  --index: 0;
+}
+.square:nth-child(2) {
+  top: 230px;
+  left: -100px;
+  width: 120px;
+  height: 120px;
+  z-index: 2;
+  --index: 1;
+}
+.square:nth-child(3) {
+  bottom: 50px;
+  right: -60px;
+  width: 80px;
+  height: 80px;
+  z-index: 2;
+  --index: 2;
+}
+.square:nth-child(4) {
+  bottom: -30px;
+  left: -120px;
+  width: 50px;
+  height: 50px;
+  --index: 3;
+  
+}
+/* end */
+h2 {
+  font-family: cursive;
+  text-transform: uppercase;
+  font-weight: bold;
+  color: var(--scnd-bgr-color);
+  letter-spacing: 1px;
+  line-height: 1;
+  font-size: 30px;
+}
+#slogan-text {
+  font-family: cursive;
+}
+/* form styling starts here */
+#res-input {
+  margin-top: 30px;
+  text-align: left;
+  padding-left: var(--container-padding);
+  font-size: var(--medium-font-size);
+  margin-bottom: 5px;
+}
+/* styling the input that is restricted to one carrier */
+.radio-container {
+  display: flex;
+  color: var(--font-color);
+  align-items: center;
+  justify-content: space-evenly;
+  padding-left: var(--container-padding);
+  padding-right: 80px;
+  font-size: var(--big-font-size);
+}
+
+.number-field-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding-left: var(--container-padding);
+  padding-right: var(--container-padding);
+  position: relative;
+  box-sizing: border-box;
+  margin: 10px auto 10px auto;
+}
+
+.res-error-message, .error-message {
+  color: var(--error-color);
+  font-size: var(--small-font-size);
+  text-align: left;
+  
+  
+}
+ 
+/* end of restricted input */
+
+/* styling the input that identifies the network carrier */
+input {
+  width: 100%;
+  letter-spacing: 1px;
+  font-size: var(--big-font-size);
+  padding: var(--input-padding);
+  outline: none;
+  box-sizing: border-box;
+  background : rgba(255, 255, 255, 0.2);
+  border-radius: 35px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-right: 1px solid rgba(255, 255, 255, 0.2);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  color: var(--font-color);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+input::placeholder {
+  color: #e1c99d;
+}
+/* .restricted-number-field:invalid {
+  border: 4px solid var(--error-color);
+  border-radius: 35px;
+  box-shadow: 0 5px 15px red;
+} */
+
+#input-para {
+  text-align: left;
+  padding-left: var(--container-padding);
+  font-size: var(--medium-font-size);
+}
+.carrier-logo {
+  width: 80px;
+  height: 50px;
+  position: absolute;
+  top: 2px;
+  right: 63px;
+  z-index: 3;
+  border-radius: 35px;
+}
+.carrier-logo.mtn {
+  background: url("logos/mtn.png");
+}
+.carrier-logo.glo {
+  background: url("logos/glo.png");
+}
+.carrier-logo.airtel {
+  background: url("logos/airtel.png");
+}
+.carrier-logo.etisalat {
+  background: url("logos/etisalat.png");
+}
+/* end of the input that identifies mobile networks */
+
+
+button {
+  width: 82%;
+  margin-top: 10px;
+  font-size: var(--medium-font-size);
+  background-color: var(--scnd-bgr-color);
+  outline: none;
+  cursor: pointer;
+  color: var(--font-color);
+  padding: var(--input-padding);
+  font-weight: bold;
+  border-radius: 35px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-right: 1px solid rgba(255, 255, 255, 0.2);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);  
+}
+
+/* end of form */
+
+/* mobile view */
+@media (max-width: 768px) {
+  section::before,
+  section::after {
+    display: none;
+  }
+  .container {
+    width: 100%;
+  }
+  input,
+  #input-para,
+  #res-input {
+    font-size: var(--small-font-size);
+  }
+  .radio-container, button {
+    font-size: var(--medium-font-size);
+  }
+  #input-para {
+    text-align: center;
+    padding: 10px;
+  }
+  
+  .square {
+    display: none;
+  }
+}
