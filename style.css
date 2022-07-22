@@ -211,7 +211,7 @@ input {
   outline: none;
   box-sizing: border-box;
   background : rgba(255, 255, 255, 0.2);
-  border-radius: 35px;
+/*   border-radius: 35px; */
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-right: 1px solid rgba(255, 255, 255, 0.2);
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
@@ -237,9 +237,12 @@ input::placeholder {
   height: 50px;
   position: absolute;
   top: 2px;
-  right: 63px;
-  z-index: 3;
-  border-radius: 35px;
+  right: 61px;
+  z-index: 99;
+  padding: 10px;
+    
+  
+/*   border-radius: 35px; */
 }
 .carrier-logo.mtn {
   background: url("logos/mtn.png");
@@ -252,6 +255,7 @@ input::placeholder {
 }
 .carrier-logo.etisalat {
   background: url("logos/etisalat.png");
+/*   background-color: white; */
 }
 /* end of the input that identifies mobile networks */
 
@@ -300,4 +304,10 @@ button {
   .square {
     display: none;
   }
+/*   .carrier-logo {
+  width: 80px;
+  height: 50px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  } */
 }

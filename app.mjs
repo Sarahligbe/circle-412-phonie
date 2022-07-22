@@ -90,13 +90,17 @@ function resInputMaxLength() {
   if (restrictedNumField.value.startsWith("0")) {
     restrictedNumField.maxLength = "11";
     return true;
-  }
+  } else if (restrictedNumField.innerHTML == "") {
+      restrictedNumField.maxLength = "14";
+    }  
 }
 function inputMaxLength() {
   if (numberField.value.startsWith("0")) {
     numberField.maxLength = "11";
     return true;
-  }
+  } else if (numberField.innerHTML == "") {
+      numberField.maxLength = "14";
+    }
 }
 
 // function to identify the carrier/network
