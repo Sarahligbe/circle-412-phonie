@@ -69,8 +69,8 @@ section::after {
 /* styling the glass-like container */
 .container {
   position: relative;
-  width: 700px;
-  height: 550px;
+  width:500px;
+/*   height: 550px; */
   perspective: 500px;
   z-index: 2;
 }
@@ -95,6 +95,7 @@ section::after {
   margin: 0 auto;
   text-align: center;
   padding-top: 30px;
+  padding-bottom: 40px;
 }
 
 .square {
@@ -151,7 +152,6 @@ section::after {
 }
 /* end */
 h2 {
-  font-family: cursive;
   text-transform: uppercase;
   font-weight: bold;
   color: var(--scnd-bgr-color);
@@ -159,11 +159,9 @@ h2 {
   line-height: 1;
   font-size: 30px;
 }
-#slogan-text {
-  font-family: cursive;
-}
+
 /* form styling starts here */
-#res-input {
+#radio-label {
   margin-top: 30px;
   text-align: left;
   padding-left: var(--container-padding);
@@ -192,7 +190,7 @@ h2 {
   margin: 10px auto 10px auto;
 }
 
-.res-error-message, .error-message {
+.error-message {
   color: var(--error-color);
   font-size: var(--small-font-size);
   text-align: left;
@@ -227,11 +225,11 @@ input::placeholder {
   box-shadow: 0 5px 15px red;
 } */
 
-#input-para {
+/* #input-para {
   text-align: left;
   padding-left: var(--container-padding);
   font-size: var(--medium-font-size);
-}
+} */
 .carrier-logo {
   width: 80px;
   height: 50px;
@@ -289,17 +287,16 @@ button {
     width: 100%;
   }
   input,
-  #input-para,
-  #res-input {
+  #radio-label {
     font-size: var(--small-font-size);
   }
   .radio-container, button {
     font-size: var(--medium-font-size);
   }
-  #input-para {
+/*   #input-para {
     text-align: center;
     padding: 10px;
-  }
+  } */
   
   .square {
     display: none;

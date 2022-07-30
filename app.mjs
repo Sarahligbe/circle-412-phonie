@@ -1,11 +1,11 @@
-let numberField = document.querySelector(".number-field");
-let restrictedNumField = document.querySelector(".restricted-number-field");
-let restrictedErrorMsg = document.querySelector(".res-error-message");
+
+let numField = document.querySelector(".number-field");
 let errorMsg = document.querySelector(".error-message");
 let radioAirtel = document.getElementById("airtel");
 let radioGlo = document.getElementById("glo");
 let radioEtisalat = document.getElementById("etisalat");
 let radioMtn = document.getElementById("mtn");
+let mobileCarrierName = document.getElementsByName("mobile-carrier");
 // let amountField = document.querySelector(".amount-field");
 
 function startApp() {
@@ -13,141 +13,134 @@ function startApp() {
     // single function (though there's no penalty for that), 
     // so create and use/call additional functions from here
   
-    // pls remove the below and make some magic in here!
-  // for the input restricted to one carrier 
-restrictedNumField.addEventListener("keyup", restrictToCarrier);
-// for the input that identifies the mobile carrier/network 
-numberField.addEventListener("keyup", identifyCarrier);
+    // pls remove the below and make some magic in here! 
+numField.addEventListener("keyup", restrictToCarrier);
+
 }
 function restrictToCarrier() {
   // to restrict users from typing any character other than numbers or "+"(for cases when the user wishes to include country code)
-  restrictedNumField.value = restrictedNumField.value.replace(/[^\d|\+]/g, "");
+  numField.value = numField.value.replace(/[^\d|\+]/g, "");
+   if (numField.value == "") {
+    numField.previousElementSibling.className = "carrier-logo";
+    return;
+  }
 
   /* checks if a radio button is selected, assigns the pattern of the selected radio button and throws an error if the pattern is not matched*/
   if (radioAirtel.checked) {
-    restrictedNumField.pattern =
-      "(((\\+)?234{1})|0)(70[18]|80[28]|812|9(0[1247]|12))[0-9]{7}";
-    if (restrictedNumField.validity.valid) {
-      restrictedErrorMsg.innerHTML = "";
-      // restrictedErrorMsg.className = "res-error-message"
+    numField.pattern = mobileCarriers[2].pattern;
+    if (numField.validity.valid) {
+      errorMsg.innerHTML = "";
     } else {
       showAirtelError();
     }
   } else if (radioGlo.checked) {
-    restrictedNumField.pattern =
-      "(((\\+)?234)|0)(705|80[57]|81[15]|9(0|1)5)[0-9]{7}";
-    if (restrictedNumField.validity.valid) {
-      restrictedErrorMsg.innerHTML = "";
-      restrictedErrorMsg.className = "res-error-message";
+    numField.pattern =
+      mobileCarriers[1].pattern;
+    if (numField.validity.valid) {
+      errorMsg.innerHTML = "";
+      errorMsg.className = "error-message";
     } else {
       showGloError();
     }
   } else if (radioEtisalat.checked) {
-    restrictedNumField.pattern = "(((\\+)?234)|0)(809|81[78]|90[89])[0-9]{7}";
-    if (restrictedNumField.validity.valid) {
-      restrictedErrorMsg.innerHTML = "";
-      restrictedErrorMsg.className = "res-error-message";
+    numField.pattern = mobileCarriers[3].pattern;
+    if (numField.validity.valid) {
+      errorMsg.innerHTML = "";
+      errorMsg.className = "error-message";
     } else {
       showEtisalatError();
     }
   } else if (radioMtn.checked) {
-    restrictedNumField.pattern =
-      "(((\\+)?234)|0)(70[2346]|8(0[36]|1[0346])|9(0[36]|1[36]))[0-9]{7}";
-    if (restrictedNumField.validity.valid) {
-      restrictedErrorMsg.innerHTML = "";
-      restrictedErrorMsg.className = "res-error-message";
+    numField.pattern =
+      mobileCarriers[0].pattern;
+    if (numField.validity.valid) {
+      errorMsg.innerHTML = "";
+      errorMsg.className = "error-message";
     } else {
       showMtnError();
     }
+  //to identify the mobile network of the inputed number  
   } else {
-    restrictedErrorMsg.innerHTML = "Select a network provider first";
+    autoCheck()
+    for (let i = 0; i < mobileCarriers.length; i++) {
+        if (numField.value.match(mobileCarriers[i].regEx)) {
+          errorMsg.innerHTML = "";
+          numField.previousElementSibling.classList.add(mobileCarriers[i].name);  
+          return true;
+        } else {
+          errorMsg.innerHTML = "Entered value does not match any mobile carrier";
+          inputMaxLength();
+        }    
+    }
   }
-  resInputMaxLength();
+  inputMaxLength();
 }
-
+// to automatically check a radio button after the mobile network has been identified
+function autoCheck() {
+  if (numField.value.match(mobileCarriers[0].regEx)) {
+    mobileCarrierName[0].checked = true
+  } else if (numField.value.match(mobileCarriers[1].regEx)) {
+    mobileCarrierName[1].checked = true
+  } else if (numField.value.match(mobileCarriers[2].regEx)) {
+    mobileCarrierName[2].checked = true
+  } else if (numField.value.match(mobileCarriers[3].regEx)) {
+    mobileCarrierName[3].checked = true
+  } 
+}
 /* error functions*/
 function showAirtelError() {
-  if (restrictedNumField.validity.patternMismatch) {
-    restrictedErrorMsg.innerHTML = "Entered value needs to be an Airtel number";
+  if (numField.validity.patternMismatch) {
+    errorMsg.innerHTML = "Entered value needs to be an Airtel number";
   }
 }
 function showGloError() {
-  if (restrictedNumField.validity.patternMismatch) {
-    restrictedErrorMsg.innerHTML = "Entered value needs to be a Glo number";
+  if (numField.validity.patternMismatch) {
+    errorMsg.innerHTML = "Entered value needs to be a Glo number";
   }
 }
 function showEtisalatError() {
-  if (restrictedNumField.validity.patternMismatch) {
-    restrictedErrorMsg.innerHTML = "Entered value needs to be a 9mobile number";
+  if (numField.validity.patternMismatch) {
+    errorMsg.innerHTML = "Entered value needs to be a 9mobile number";
   }
 }
 function showMtnError() {
-  if (restrictedNumField.validity.patternMismatch) {
-    restrictedErrorMsg.innerHTML = "Entered value needs to be an Mtn number";
+  if (numField.validity.patternMismatch) {
+    errorMsg.innerHTML = "Entered value needs to be an Mtn number";
   }
 }
-function resInputMaxLength() {
-  if (restrictedNumField.value.startsWith("0")) {
-    restrictedNumField.maxLength = "11";
+//to set the maxlength of the numbers
+function inputMaxLength() {
+  if (numField.value.startsWith("0")) {
+    numField.maxLength = "11";
     return true;
-  } else if (restrictedNumField.innerHTML == "") {
-      restrictedNumField.maxLength = "14";
+  } else if (numField.innerHTML == "") {
+      numField.maxLength = "14";
     }  
 }
-function inputMaxLength() {
-  if (numberField.value.startsWith("0")) {
-    numberField.maxLength = "11";
-    return true;
-  } else if (numberField.innerHTML == "") {
-      numberField.maxLength = "14";
-    }
-}
-
-// function to identify the carrier/network
-function identifyCarrier() {
-  //it returns itself if the input field is empty. like in its original state
-  if (numberField.value == "") {
-    numberField.previousElementSibling.className = "carrier-logo";
-    return;
-  }
-
-  //removes all the characters that are not numbers or +
-  numberField.value = numberField.value.replace(/[^\d|\+]/g, "");
-
-  //object that stores the regex and name of each mobile carrier
-  let mobileCarriers = [
+//mobile network array
+let mobileCarriers = [
     {
       name: "mtn",
-      regEx: /(((\+)?234)|0)(70[2346]|8(0[36]|1[0346])|9(0[36]|1[36]))[0-9]{7}/,
+      regEx: /(((\+)?234)|0)(70[2346]|8(0[36]|1[0346])|9(0[36]|1[36]))/,
+      pattern: "(((\\+)?234)|0)(70[2346]|8(0[36]|1[0346])|9(0[36]|1[36]))[0-9]{7}"
     },
     {
       name: "glo",
-      regEx: /^(((\+)?234)|0)(705|80[57]|81[15]|9(0|1)5)[0-9]{7}$/,
+      regEx: /(((\+)?234)|0)(705|80[57]|81[15]|9(0|1)5)/,
+      pattern: "(((\\+)?234)|0)(705|80[57]|81[15]|9(0|1)5)[0-9]{7}"
     },
     {
       name: "airtel",
-      regEx: /(((\+)?234{1})|0)(70[18]|80[28]|812|9(0[1247]|12))[0-9]{7}/,
+      regEx: /(((\+)?234{1})|0)(70[18]|80[28]|812|9(0[1247]|12))/,
+      pattern: "(((\\+)?234{1})|0)(70[18]|80[28]|812|9(0[1247]|12))[0-9]{7}"
     },
     {
       name: "etisalat",
-      regEx: /(((\+)?234)|0)(809|81[78]|90[89])[0-9]{7}/,
+      regEx: /(((\+)?234)|0)(809|81[78]|90[89])/,
+      pattern: "(((\\+)?234)|0)(809|81[78]|90[89])[0-9]{7}"
     },
   ];
-
-  /*loops through the object, if the number entered matches the regex pattern
-   it adds the name property of the object as a class which is added to the css file to display the logo*/
-  for (let i = 0; i < mobileCarriers.length; i++) {
-    if (numberField.value.match(mobileCarriers[i].regEx)) {
-      errorMsg.innerHTML = "";
-      numberField.previousElementSibling.classList.add(mobileCarriers[i].name);
-      return true;
-    } else {
-      errorMsg.innerHTML = "Entered value does not match any mobile carrier";
-      inputMaxLength();
-    }
-  }
-}
-  
+ 
   // ======= DO NOT EDIT ============== //
   export default startApp;
   // ======= EEND DO NOT EDIT ========= //

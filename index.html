@@ -20,7 +20,7 @@
           <h2>Phonie</h2>
           <p id="slogan-text">Top-up smartly</p>
           <form novalidate>
-            <p id="res-input">Select your mobile network</p>
+            <p id="radio-label">Select your mobile network</p>
             <div class="radio-container">
               <input type="radio" id="mtn" name="mobile-carrier" value="MTN" />
               <label for="mtn">MTN</label>
@@ -43,15 +43,17 @@
             </div>
 
             <div class="number-field-container">
-              <span class="res-error-message"></span>
+              <div class="carrier-logo"></div>
+              
               <input
-                class="restricted-number-field"
+                class="number-field"
                 type="tel"
                 placeholder="Enter your mobile number"
               />
+              <span class="error-message"></span>
             </div>
 
-            <p id="input-para">
+<!--             <p id="input-para">
               Not sure of the mobile carrier? Enter your number below instead
             </p>
             <div class="number-field-container">
@@ -65,7 +67,7 @@
               />
               <span class="error-message"></span>
               
-            </div>
+            </div> -->
             <div class="number-field-container">
               <input
                 class="amount-field"
