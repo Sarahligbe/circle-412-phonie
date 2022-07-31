@@ -68,7 +68,9 @@ section {
 ol {
   text-align: start;
 }
-
+#br-span{
+  text-align: center;
+}
 .container .face {
   position: relative;
   top: 0;
