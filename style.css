@@ -16,9 +16,8 @@
 }
 
 body {
-  background: url("logos/background.jpg");
+  background: url("logos/background.jpg"), #410557;
   overflow: hidden;
-  background-repeat: no-repeat;
   background-size: cover;
   color: var(--font-color);
   font-family: "Poppins", sans-serif;
@@ -240,16 +239,16 @@ input::placeholder {
   /*   border-radius: 35px; */
 }
 .carrier-logo.mtn {
-  background: url("images/mtn.png");
+  background: url("logos/mtn.png");
 }
 .carrier-logo.glo {
-  background: url("images/glo.png");
+  background: url("logos/glo.png");
 }
 .carrier-logo.airtel {
-  background: url("images/airtel.png");
+  background: url("logos/airtel.png");
 }
 .carrier-logo.etisalat {
-  background: url("images/etisalat.png");
+  background: url("logos/etisalat.png");
   /*   background-color: white; */
 }
 /* end of the input that identifies mobile networks */

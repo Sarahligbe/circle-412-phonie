@@ -1,97 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Phonie</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Phonie</title>
 
-    <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-    
+
   <section>
-      <div class="how-it-works-popup">
-        <img src="logos/question_mark.png" class="question-mark" />
-        <h2>First time?</h2>
-        <p>Phonie helps you top-up in two ways:</p>
-        <ol>
-          <li>
-            Select your mobile network, Input your mobile number and purchase
-            amount and pay
-          </li>
-          <li>
-            Unsure of your mobile network? Simply type in your mobile number,
-            we'll identify your network and automatically select it for you,
-            input your purchase amount and pay
-          </li>
-        </ol>
-        <button type="button" id="how-it-works-btn">OK</button>
+    <div class="how-it-works-popup">
+      <img src="logos/question_mark.png" class="question-mark" />
+      <h2>First time?</h2>
+      <p>Phonie helps you top-up in two ways:</p>
+      <ol>
+        <li>
+          Select your mobile network, Input your mobile number and purchase
+          amount and pay
+        </li>
+        <li>
+          Unsure of your mobile network? Simply type in your mobile number,
+          we'll identify your network and automatically select it for you,
+          input your purchase amount and pay
+        </li>
+      </ol>
+      <button type="button" id="how-it-works-btn">OK</button>
+    </div>
+    <div class="container">
+      <div class="square"></div>
+      <div class="square"></div>
+      <div class="square"></div>
+      <div class="square"></div>
+      <div class="face">
+        <h2>Phonie</h2>
+        <p id="slogan-text">
+          Top-up smartly.<a href="#" id="how-it-works-click"> Click here </a> to
+          find out how
+        </p>
+        <form id="my-form" novalidate>
+          <p id="radio-label">Select your mobile network (optional)</p>
+          <div class="radio-container">
+            <input type="radio" id="mtn" name="mobile-carrier" value="MTN" />
+            <label for="mtn">MTN</label>
+            <input type="radio" id="glo" name="mobile-carrier" value="GLO" />
+            <label for="glo">GLO</label>
+            <input type="radio" id="airtel" name="mobile-carrier" value="AIRTEL" />
+            <label for="airtel">AIRTEL</label>
+            <input type="radio" id="etisalat" name="mobile-carrier" value="9MOBILE" />
+            <label for="etisalat">9MOBILE</label>
+          </div>
+
+          <div class="number-field-container">
+            <div class="carrier-logo"></div>
+
+            <input class="number-field" type="tel" placeholder="Enter your mobile number" required />
+            <span class="error-message"></span>
+          </div>
+          <div class="number-field-container">
+            <input class="amount-field" type="number" placeholder="Enter your purchase amount" min="50" required />
+            <span class="amnt-error-message"></span>
+          </div>
+          <button type="reset" id="reset-btn">Reset</button>
+          <button type="submit" id="pay-btn">Pay</button>
+        </form>
       </div>
-      <div class="container">
-        <div class="square"></div>
-        <div class="square"></div>
-        <div class="square"></div>
-        <div class="square"></div>
-        <div class="face">
-          <h2>Phonie</h2>
-          <p id="slogan-text">
-            Top-up smartly.<a href="#" id="how-it-works-click"> Click</a> to
-            find out how
-          </p>
-          <form id="my-form" novalidate>
-            <p id="radio-label">Select your mobile network (optional)</p>
-            <div class="radio-container">
-              <input type="radio" id="mtn" name="mobile-carrier" value="MTN" />
-              <label for="mtn">MTN</label>
-              <input type="radio" id="glo" name="mobile-carrier" value="GLO" />
-              <label for="glo">GLO</label>
-              <input
-                type="radio"
-                id="airtel"
-                name="mobile-carrier"
-                value="AIRTEL"
-              />
-              <label for="airtel">AIRTEL</label>
-              <input
-                type="radio"
-                id="etisalat"
-                name="mobile-carrier"
-                value="9MOBILE"
-              />
-              <label for="etisalat">9MOBILE</label>
-            </div>
+    </div>
+  </section>
 
-            <div class="number-field-container">
-              <div class="carrier-logo"></div>
-
-              <input
-                class="number-field"
-                type="tel"
-                placeholder="Enter your mobile number"
-                required
-              />
-              <span class="error-message"></span>
-            </div>
-            <div class="number-field-container">
-              <input
-                class="amount-field"
-                type="number"
-                placeholder="Enter your purchase amount"
-                min="50"
-                required
-              />
-              <span class="amnt-error-message"></span>
-            </div>
-            <button type="reset" id="reset-btn">Reset</button>
-            <button type="submit" id="pay-btn">Pay</button>
-          </form>
-        </div>
-      </div>
-    </section>
-
-    <!-- // ============= EEND DO NOT EDIT ============== // -->
-    <script src="index.mjs" type="module"></script>
-    <!-- // ============= EEND DO NOT EDIT ============== // -->
+  <!-- // ============= EEND DO NOT EDIT ============== // -->
+  <script src="index.mjs" type="module"></script>
+  <!-- // ============= EEND DO NOT EDIT ============== // -->
 </body>
+
 </html>
