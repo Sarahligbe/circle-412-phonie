@@ -10,7 +10,24 @@
 </head>
 <body>
     
-    <section>
+  <section>
+      <div class="how-it-works-popup">
+        <img src="logos/question_mark.png" class="question-mark" />
+        <h2>First time?</h2>
+        <p>Phonie helps you top-up in two ways:</p>
+        <ol>
+          <li>
+            Select your mobile network, Input your mobile number and purchase
+            amount and pay
+          </li>
+          <li>
+            Unsure of your mobile network? Simply type in your mobile number,
+            we'll identify your network and automatically select it for you,
+            input your purchase amount and pay
+          </li>
+        </ol>
+        <button type="button" id="how-it-works-btn">OK</button>
+      </div>
       <div class="container">
         <div class="square"></div>
         <div class="square"></div>
@@ -18,9 +35,12 @@
         <div class="square"></div>
         <div class="face">
           <h2>Phonie</h2>
-          <p id="slogan-text">Top-up smartly</p>
-          <form novalidate>
-            <p id="radio-label">Select your mobile network</p>
+          <p id="slogan-text">
+            Top-up smartly.<a href="#" id="how-it-works-click"> Click</a> to
+            find out how
+          </p>
+          <form id="my-form" novalidate>
+            <p id="radio-label">Select your mobile network (optional)</p>
             <div class="radio-container">
               <input type="radio" id="mtn" name="mobile-carrier" value="MTN" />
               <label for="mtn">MTN</label>
@@ -44,38 +64,27 @@
 
             <div class="number-field-container">
               <div class="carrier-logo"></div>
-              
+
               <input
                 class="number-field"
                 type="tel"
                 placeholder="Enter your mobile number"
+                required
               />
               <span class="error-message"></span>
             </div>
-
-<!--             <p id="input-para">
-              Not sure of the mobile carrier? Enter your number below instead
-            </p>
-            <div class="number-field-container">
-              
-              
-              <div class="carrier-logo"></div>
-              <input
-                class="number-field"
-                type="tel"
-                placeholder="Enter your mobile number"
-              />
-              <span class="error-message"></span>
-              
-            </div> -->
             <div class="number-field-container">
               <input
                 class="amount-field"
                 type="number"
                 placeholder="Enter your purchase amount"
+                min="50"
+                required
               />
+              <span class="amnt-error-message"></span>
             </div>
-            <button type="submit">Pay</button>
+            <button type="reset" id="reset-btn">Reset</button>
+            <button type="submit" id="pay-btn">Pay</button>
           </form>
         </div>
       </div>

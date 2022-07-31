@@ -1,14 +1,13 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;800&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;800&display=swap");
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 :root {
-  --bgr-color: #1b1464;
   --font-color: white;
   --error-color: red;
-  --scnd-bgr-color: rgb(238, 6, 18);
+  --scnd-bgr-color: #ee0612;
   --container-padding: 60px;
   --input-padding: 15px;
   --small-font-size: 14px;
@@ -17,8 +16,10 @@
 }
 
 body {
-  background: var(--bgr-color);
+  background: url("logos/background.jpg");
   overflow: hidden;
+  background-repeat: no-repeat;
+  background-size: cover;
   color: var(--font-color);
   font-family: "Poppins", sans-serif;
 }
@@ -29,50 +30,44 @@ section {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-}
-
-section::before {
-  content: "";
-  position: absolute;
-  bottom: -40%;
-  left: 40%;
-  width: 600px;
-  height: 600px;
-  background: radial-gradient(
-    circle at 100px 200px,
-    rgb(4, 21, 250),
-    rgb(238, 6, 18)
-  );
-  border-radius: 50%;
-  display: block;
-  margin: 0;
-}
-
-section::after {
-  display: block;
-  border-radius: 50%;
-  height: 300px;
-  width: 300px;
-  margin: 0;
-  background: radial-gradient(
-    circle at 50px 100px,
-    rgb(238, 6, 18),
-    rgb(94, 103, 226)
-  );
-  bottom: 51%;
-  left: 17%;
-  position: absolute;
-  content: "";
+  width: 100vw;
 }
 /* end */
 
 /* styling the glass-like container */
 .container {
   position: relative;
-  width:500px;
-/*   height: 550px; */
-  perspective: 500px;
+  width: 500px;
   z-index: 2;
+}
+.how-it-works-popup {
+  width: 500px;
+  background: #fff;
+  border-radius: 15px;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  z-index: 3;
+  color: #333;
+  text-align: center;
+  transform: scale(0.1);
+  padding: 35px;
+  visibility: hidden;
+  transition: transform 0.4s, top 0.4s;
+}
+.how-it-works-popup.open-popup {
+  visibility: visible;
+  transform: scale(1);
+  top: 30%;
+}
+.how-it-works-popup img {
+  width: 100px;
+  margin-top: -70px;
+  border-radius: 50%;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+ol {
+  text-align: start;
 }
 
 .container .face {
@@ -112,7 +107,8 @@ section::after {
 }
 
 @keyframes animate {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(-20px);
   }
   50% {
@@ -148,7 +144,6 @@ section::after {
   width: 50px;
   height: 50px;
   --index: 3;
-  
 }
 /* end */
 h2 {
@@ -159,6 +154,15 @@ h2 {
   line-height: 1;
   font-size: 30px;
 }
+a {
+  color: var(--scnd-bgr-color);
+  cursor: pointer;
+  text-decoration: none;
+}
+/* .slogan-text{
+  padding-left: 15px;
+  padding-right: 15px;
+} */
 
 /* form styling starts here */
 #radio-label {
@@ -190,14 +194,13 @@ h2 {
   margin: 10px auto 10px auto;
 }
 
-.error-message {
+.error-message,
+.amnt-error-message {
   color: var(--error-color);
   font-size: var(--small-font-size);
   text-align: left;
-  
-  
 }
- 
+
 /* end of restricted input */
 
 /* styling the input that identifies the network carrier */
@@ -208,8 +211,8 @@ input {
   padding: var(--input-padding);
   outline: none;
   box-sizing: border-box;
-  background : rgba(255, 255, 255, 0.2);
-/*   border-radius: 35px; */
+  background: rgba(255, 255, 255, 0.2);
+  /*   border-radius: 35px; */
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-right: 1px solid rgba(255, 255, 255, 0.2);
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
@@ -217,7 +220,7 @@ input {
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
 }
 input::placeholder {
-  color: #e1c99d;
+  color: #aaa;
 }
 /* .restricted-number-field:invalid {
   border: 4px solid var(--error-color);
@@ -225,11 +228,6 @@ input::placeholder {
   box-shadow: 0 5px 15px red;
 } */
 
-/* #input-para {
-  text-align: left;
-  padding-left: var(--container-padding);
-  font-size: var(--medium-font-size);
-} */
 .carrier-logo {
   width: 80px;
   height: 50px;
@@ -238,29 +236,29 @@ input::placeholder {
   right: 61px;
   z-index: 99;
   padding: 10px;
-    
-  
-/*   border-radius: 35px; */
+
+  /*   border-radius: 35px; */
 }
 .carrier-logo.mtn {
-  background: url("logos/mtn.png");
+  background: url("images/mtn.png");
 }
 .carrier-logo.glo {
-  background: url("logos/glo.png");
+  background: url("images/glo.png");
 }
 .carrier-logo.airtel {
-  background: url("logos/airtel.png");
+  background: url("images/airtel.png");
 }
 .carrier-logo.etisalat {
-  background: url("logos/etisalat.png");
-/*   background-color: white; */
+  background: url("images/etisalat.png");
+  /*   background-color: white; */
 }
 /* end of the input that identifies mobile networks */
 
-
 button {
-  width: 82%;
+  width: 20%;
   margin-top: 10px;
+  margin-right: 20px;
+  margin-left: 20px;
   font-size: var(--medium-font-size);
   background-color: var(--scnd-bgr-color);
   outline: none;
@@ -268,21 +266,20 @@ button {
   color: var(--font-color);
   padding: var(--input-padding);
   font-weight: bold;
-  border-radius: 35px;
+  border-radius: 10px;
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-right: 1px solid rgba(255, 255, 255, 0.2);
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);  
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+button:hover {
+  background-color: #d32b34;
 }
 
 /* end of form */
 
 /* mobile view */
 @media (max-width: 768px) {
-  section::before,
-  section::after {
-    display: none;
-  }
   .container {
     width: 100%;
   }
@@ -290,21 +287,16 @@ button {
   #radio-label {
     font-size: var(--small-font-size);
   }
-  .radio-container, button {
+  .radio-container,
+  button {
     font-size: var(--medium-font-size);
   }
-/*   #input-para {
-    text-align: center;
-    padding: 10px;
-  } */
-  
   .square {
     display: none;
   }
-/*   .carrier-logo {
-  width: 80px;
-  height: 50px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-  } */
+  .how-it-works-popup {
+    font-size: var(--small-font-size);
+    width: 100%;
+    left: 0;
+  }
 }
