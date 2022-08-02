@@ -28,15 +28,16 @@ const payBtn = document.querySelector("#pay-btn");
 const resetBtn = document.querySelector("#reset-btn");
 const form = document.getElementById("my-form");
 const amntErrorMsg = document.querySelector(".amnt-error-message");
+
 function restrictToCarrier() {
   // to restrict users from typing any character other than numbers or "+"(for cases when the user wishes to include country code)
   numField.value = numField.value.replace(/[^\d|\+]/g, "");
   if (numField.value == "") {
     numField.previousElementSibling.className = "carrier-logo";
     errorMsg.innerHTML = "";
+    autoUncheck();
     return;
   }
-
   /* checks if a radio button is selected, assigns the pattern of the selected radio button and throws an error if the pattern is not matched*/
   if (radioAirtel.checked) {
     numField.pattern = mobileCarriers[2].pattern;
@@ -79,12 +80,36 @@ function restrictToCarrier() {
         return true;
       } else {
         errorMsg.innerHTML = "Entered value does not match any mobile carrier";
-        inputMaxLength();
       }
     }
   }
   inputMaxLength();
 }
+
+//mobile network array
+const mobileCarriers = [
+  {
+    name: "mtn",
+    regEx: /(((\+)?234)|0)(70[2346]|8(0[36]|1[0346])|9(0[36]|1[36]))/,
+    pattern:
+      "(((\\+)?234)|0)(70[2346]|8(0[36]|1[0346])|9(0[36]|1[36]))[0-9]{7}",
+  },
+  {
+    name: "glo",
+    regEx: /(((\+)?234)|0)(705|80[57]|81[15]|9(0|1)5)/,
+    pattern: "(((\\+)?234)|0)(705|80[57]|81[15]|9(0|1)5)[0-9]{7}",
+  },
+  {
+    name: "airtel",
+    regEx: /(((\+)?234{1})|0)(70[18]|80[28]|812|9(0[1247]|12))/,
+    pattern: "(((\\+)?234{1})|0)(70[18]|80[28]|812|9(0[1247]|12))[0-9]{7}",
+  },
+  {
+    name: "etisalat",
+    regEx: /(((\+)?234)|0)(809|81[78]|90[89])/,
+    pattern: "(((\\+)?234)|0)(809|81[78]|90[89])[0-9]{7}",
+  },
+];
 
 //how it works popup
 function openPopup() {
@@ -94,15 +119,19 @@ function closePopup() {
   howItWorksPopup.classList.remove("open-popup");
 }
 // to automatically check a radio button after the mobile network has been identified
+// to automatically check a radio button after the mobile network has been identified
 function autoCheck() {
-  if (numField.value.match(mobileCarriers[0].regEx)) {
-    mobileCarrierName[0].checked = true;
-  } else if (numField.value.match(mobileCarriers[1].regEx)) {
-    mobileCarrierName[1].checked = true;
-  } else if (numField.value.match(mobileCarriers[2].regEx)) {
-    mobileCarrierName[2].checked = true;
-  } else if (numField.value.match(mobileCarriers[3].regEx)) {
-    mobileCarrierName[3].checked = true;
+  mobileCarrierName.forEach((radio, i) => {
+    const regexPattern = mobileCarriers[i].regEx;
+    if (numField.value.match(mobileCarriers[i].regEx)) {
+      mobileCarrierName[i].checked = true;
+    }
+  });
+}
+// to uncheck the radio buttons
+function autoUncheck() {
+  for (let i = 0; i < mobileCarrierName.length; i++) {
+    mobileCarrierName[i].checked = false;
   }
 }
 /* error functions*/
@@ -146,30 +175,6 @@ function inputMaxLength() {
     numField.maxLength = "14";
   }
 }
-//mobile network array
-const mobileCarriers = [
-  {
-    name: "mtn",
-    regEx: /(((\+)?234)|0)(70[2346]|8(0[36]|1[0346])|9(0[36]|1[36]))/,
-    pattern:
-      "(((\\+)?234)|0)(70[2346]|8(0[36]|1[0346])|9(0[36]|1[36]))[0-9]{7}",
-  },
-  {
-    name: "glo",
-    regEx: /(((\+)?234)|0)(705|80[57]|81[15]|9(0|1)5)/,
-    pattern: "(((\\+)?234)|0)(705|80[57]|81[15]|9(0|1)5)[0-9]{7}",
-  },
-  {
-    name: "airtel",
-    regEx: /(((\+)?234{1})|0)(70[18]|80[28]|812|9(0[1247]|12))/,
-    pattern: "(((\\+)?234{1})|0)(70[18]|80[28]|812|9(0[1247]|12))[0-9]{7}",
-  },
-  {
-    name: "etisalat",
-    regEx: /(((\+)?234)|0)(809|81[78]|90[89])/,
-    pattern: "(((\\+)?234)|0)(809|81[78]|90[89])[0-9]{7}",
-  },
-];
 
 //amount field minimum value restriction
 function amntField() {
@@ -202,6 +207,7 @@ function pay() {
 
 function reset() {
   form.reset();
+  numField.previousElementSibling.className = "carrier-logo";
 }
   // ======= DO NOT EDIT ============== //
   export default startApp;

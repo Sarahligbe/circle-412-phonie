@@ -213,7 +213,7 @@ input {
   outline: none;
   box-sizing: border-box;
   background: rgba(255, 255, 255, 0.2);
-  /*   border-radius: 35px; */
+  border-radius: 10px;
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-right: 1px solid rgba(255, 255, 255, 0.2);
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
@@ -223,10 +223,9 @@ input {
 input::placeholder {
   color: #aaa;
 }
-/* .restricted-number-field:invalid {
-  border: 4px solid var(--error-color);
-  border-radius: 35px;
-  box-shadow: 0 5px 15px red;
+/* .number-field:invalid {
+  border: 1px solid var(--error-color);
+  border-radius: 10px;
 } */
 
 .carrier-logo {
