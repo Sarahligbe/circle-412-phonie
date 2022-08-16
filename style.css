@@ -16,7 +16,7 @@
 }
 
 body {
-  background: url("logos/background.jpg"), #410557;
+  background: url("logos/background.jpg"), #170557;
   overflow: hidden;
   background-size: cover;
   color: var(--font-color);
@@ -68,9 +68,7 @@ section {
 ol {
   text-align: start;
 }
-#br-span{
-  text-align: center;
-}
+
 .container .face {
   position: relative;
   top: 0;
@@ -160,10 +158,10 @@ a {
   cursor: pointer;
   text-decoration: none;
 }
-/* .slogan-text{
-  padding-left: 15px;
-  padding-right: 15px;
-} */
+a:hover {
+  text-decoration: underline;
+}
+
 
 /* form styling starts here */
 #radio-label {

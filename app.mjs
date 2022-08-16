@@ -118,7 +118,7 @@ function openPopup() {
 function closePopup() {
   howItWorksPopup.classList.remove("open-popup");
 }
-// to automatically check a radio button after the mobile network has been identified
+
 // to automatically check a radio button after the mobile network has been identified
 function autoCheck() {
   mobileCarrierName.forEach((radio, i) => {
@@ -136,28 +136,38 @@ function autoUncheck() {
 }
 /* error functions*/
 function showAirtelError() {
-  if (numField.validity.patternMismatch) {
-    errorMsg.innerHTML = "Entered value needs to be an Airtel number";
+  if (numField.validity.patternMismatch && numField.value.startsWith("0")) {
+    errorMsg.innerHTML = "Value needs to be an 11-digit Airtel number";
+  } else {
+    errorMsg.innerHTML = "Value needs to be a 13-digit Airtel number";
   }
 }
 function showGloError() {
-  if (numField.validity.patternMismatch) {
-    errorMsg.innerHTML = "Entered value needs to be a Glo number";
+  if (numField.validity.patternMismatch && numField.value.startsWith("0")) {
+    errorMsg.innerHTML = "Value needs to be an 11-digit Glo number";
+  } else {
+    errorMsg.innerHTML = "Value needs to be a 13-digit Glo number";
   }
 }
 function showEtisalatError() {
-  if (numField.validity.patternMismatch) {
-    errorMsg.innerHTML = "Entered value needs to be a 9mobile number";
+  if (numField.validity.patternMismatch && numField.value.startsWith("0")) {
+    errorMsg.innerHTML = "Value needs to be an 11-digit 9-mobile number";
+  } else {
+    errorMsg.innerHTML = "Value needs to be a 13-digit 9-mobile number";
   }
 }
 function showMtnError() {
-  if (numField.validity.patternMismatch) {
-    errorMsg.innerHTML = "Entered value needs to be an Mtn number";
+  if (numField.validity.patternMismatch && numField.value.startsWith("0")) {
+    errorMsg.innerHTML = "Value needs to be an 11-digit Mtn number";
+  } else {
+    errorMsg.innerHTML = "Value needs to be a 13-digit Mtn number";
   }
 }
-function showError() {
+function showMissingValueError() {
   if (numField.validity.valueMissing) {
-    errorMsg.innerHTML = "Enter a value";
+    errorMsg.innerHTML = "Enter a value";  
+  }
+  if (amountField.validity.valueMissing) {
     amntErrorMsg.innerHTML = "Enter a value";
   }
 }
@@ -171,25 +181,22 @@ function inputMaxLength() {
   if (numField.value.startsWith("0")) {
     numField.maxLength = "11";
     return true;
-  } else if (numField.innerHTML == "") {
+  } else {
     numField.maxLength = "14";
   }
 }
 
 //amount field minimum value restriction
 function amntField() {
-  if (amountField.value == "") {
+  if (amountField.value == "" || amountField.validity.valid) {
     amntErrorMsg.innerHTML = "";
     return;
-  }
-  if (amountField.validity.valid) {
-    amntErrorMsg.innerHTML = "";
   }
   amntFieldError();
 }
 
 //pay button
-function pay() {
+function pay(event) {
   let mobileCarrierValue;
   for (let i = 0; i < mobileCarrierName.length; i++) {
     if (mobileCarrierName[i].checked) {
@@ -197,7 +204,8 @@ function pay() {
     }
   }
   if (!numField.validity.valid || !amountField.validity.valid) {
-    showError();
+    showMissingValueError();
+    event.preventDefault();
   } else {
     alert(
       `You successfully purchased #${amountField.value} worth of ${mobileCarrierValue} airtime for ${numField.value}`
@@ -208,6 +216,8 @@ function pay() {
 function reset() {
   form.reset();
   numField.previousElementSibling.className = "carrier-logo";
+  errorMsg.innerHTML = "";
+  amntErrorMsg.innerHTML = "";
 }
   // ======= DO NOT EDIT ============== //
   export default startApp;
